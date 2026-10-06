@@ -1,0 +1,27 @@
+# TODO: Build a CI workflow that runs on every push/PR to main.
+#
+# Steps it should include:
+#   1. Checkout code
+#   2. Set up Python
+#   3. pip install -r requirements.txt
+#   4. Run pytest
+#
+# No database service needed here — tests use an in-memory SQLite DB
+# (sqlite3.connect(":memory:")), so there's nothing external to spin up.
+# This is notably simpler than the Postgres-based CI from the other
+# project, since SQLite needs no server at all.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # TODO: add the rest of the steps

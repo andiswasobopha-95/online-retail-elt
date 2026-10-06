@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# The real dataset — too large and not yours to redistribute
+data/raw/*.csv
+
+# The SQLite database file — generated, not source
+*.db
+
+.DS_Store

@@ -1,0 +1,29 @@
+-- TODO: Build a staging view that cleans the raw data.
+--
+-- This is where real business judgment comes in. Think through each
+-- decision rather than copying a pattern blindly:
+--
+-- 1. Cancelled orders: InvoiceNo starting with "C" means a cancellation.
+--    Should these be excluded from staging entirely, or kept but flagged
+--    with a column like `is_cancelled`? Either is defensible — pick one
+--    and be ready to explain why.
+--
+-- 2. Missing CustomerID: many rows have no customer attached (likely
+--    guest checkouts or data quality issues in the original export).
+--    Should you exclude these, or keep them for revenue totals but
+--    exclude them from customer-level analysis? Think about which mart
+--    views will need CustomerID and which won't.
+--
+-- 3. Negative quantities: these are returns, not necessarily bad data.
+--    Should staging keep them (so marts can calculate net sales = sales
+--    minus returns) or exclude them? Keeping them and calculating "net"
+--    in the marts layer is usually the more honest approach.
+--
+-- 4. Computed columns: consider adding `line_total` (Quantity * UnitPrice)
+--    here, so you don't repeat that calculation in every downstream mart.
+--
+-- CREATE VIEW staging_transactions AS
+-- SELECT
+--     ...
+-- FROM raw_transactions
+-- WHERE ...

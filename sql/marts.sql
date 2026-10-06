@@ -1,0 +1,31 @@
+-- TODO: Build mart views that answer real business questions, reading
+-- from staging_transactions (never from raw_transactions directly).
+--
+-- Suggested views to build:
+--
+-- 1. revenue_by_country
+--    Total revenue and order count per country. Think about whether to
+--    use SUM(line_total) and how to handle any returns you kept in
+--    staging.
+--
+-- 2. top_products
+--    Best-selling products by total quantity and by total revenue —
+--    these can be different rankings. Group by StockCode and/or
+--    Description.
+--
+-- 3. monthly_revenue
+--    Revenue trend by month. Look up SQLite's `strftime('%Y-%m',
+--    InvoiceDate)` for grouping by month from a date column.
+--
+-- 4. repeat_customers (optional, if time allows)
+--    Customers who appear on more than one distinct InvoiceNo — a decent
+--    proxy for repeat buyers.
+--
+-- CREATE VIEW revenue_by_country AS
+-- SELECT ...
+--
+-- CREATE VIEW top_products AS
+-- SELECT ...
+--
+-- CREATE VIEW monthly_revenue AS
+-- SELECT ...
