@@ -23,5 +23,14 @@
 --     before?
 
 CREATE TABLE IF NOT EXISTS raw_transactions (
-    -- TODO: define columns
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceNo TEXT,
+    StockCode TEXT,
+    Description TEXT,
+    Quantity INTEGER,
+    InvoiceDate TEXT,
+    UnitPrice REAL,
+    CustomerID TEXT,
+    Country TEXT,
+    loaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
