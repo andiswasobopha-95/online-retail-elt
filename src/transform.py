@@ -3,53 +3,49 @@ from pathlib import Path
 
 DB_PATH = Path("online_retail.db")
 STAGING_SQL_PATH = Path("sql/staging.sql")
-MARTS_SQL_PATH = Path("sql/marts.sql")
 
-def run_transformations(db_path: Path = DB_PATH):
-    """Executes staging and marts SQL scripts and prints analytical insights."""
-    if not STAGING_SQL_PATH.exists() or not MARTS_SQL_PATH.exists():
-        raise FileNotFoundError("Transformation SQL files are missing.")
+def run_staging_transform(db_path: Path = DB_PATH, sql_path: Path = STAGING_SQL_PATH):
+    """Executes the staging SQL script to create the staging view and verifies it works."""
+    if not sql_path.exists():
+        raise FileNotFoundError(f"Staging SQL file not found at {sql_path}")
         
     print(f"Connecting to database at {db_path}...")
     with sqlite3.connect(db_path) as conn:
+        with open(sql_path, "r", encoding="utf-8") as f:
+            sql_script = f.read()
+            
+        print("Executing staging transformation script...")
+        conn.executescript(sql_script)
+        conn.commit()
+        
+        # Verification queries
         cursor = conn.cursor()
         
-        # 1. Run Staging Transformation
-        print("Executing staging transformation script...")
-        with open(STAGING_SQL_PATH, "r", encoding="utf-8") as f:
-            conn.executescript(f.read())
-            
+        # 1. Total rows in the staging view
         cursor.execute("SELECT COUNT(*) FROM staging_transactions;")
-        staging_count = cursor.fetchone()[0]
-        print(f" -> Staging view ready ({staging_count:,} rows).")
+        total_rows = cursor.fetchone()[0]
         
-        # 2. Run Marts Transformation
-        print("Executing analytical marts script...")
-        with open(MARTS_SQL_PATH, "r", encoding="utf-8") as f:
-            conn.executescript(f.read())
-        print(" -> Analytical marts views created successfully!\n")
+        # 2. Count cancellations vs normal transactions
+        cursor.execute("SELECT is_cancelled, COUNT(*) FROM staging_transactions GROUP BY is_cancelled;")
+        breakdown = cursor.fetchall()
         
-        # 3. Query & Print Insights: Top 5 Products
-        print("--- TOP 5 PRODUCTS BY NET REVENUE ---")
+        # 3. Sample rows
         cursor.execute("""
-            SELECT StockCode, Description, total_units_sold, total_net_revenue 
-            FROM top_products 
+            SELECT InvoiceNo, StockCode, Quantity, UnitPrice, line_total, is_cancelled 
+            FROM staging_transactions 
             LIMIT 5;
         """)
-        for row in cursor.fetchall():
-            print(f"Code: {row[0]} | Desc: {row[1]} | Units: {row[2]:,} | Revenue: ${row[3]:,.2f}")
-            
-        # 4. Query & Print Insights: Monthly Revenue Trends
-        print("\n--- MONTHLY REVENUE TRENDS (Sample) ---")
-        cursor.execute("""
-            SELECT order_month, total_orders, net_revenue 
-            FROM monthly_revenue 
-            LIMIT 5;
-        """)
-        for row in cursor.fetchall():
-            print(f"Month: {row[0]} | Orders: {row[1]:,} | Net Revenue: ${row[2]:,.2f}")
-
-        conn.commit()
+        sample_rows = cursor.fetchall()
+        
+    print(f"\n Staging view created successfully!")
+    print(f"Total rows in staging view: {total_rows:,}")
+    print("\nCancellation breakdown (0 = normal, 1 = cancelled/return):")
+    for status, count in breakdown:
+        print(f"  - Status {status}: {count:,} rows")
+        
+    print("\nSample transformed rows:")
+    for row in sample_rows:
+        print(row)
 
 if __name__ == "__main__":
-    run_transformations()
+    run_staging_transform()
