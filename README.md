@@ -11,3 +11,5 @@ Processes over 1 million rows from the UCI Online Retail dataset (2009–2011) u
 ## Tech Stack
 Python · Pandas · SQLite · SQL · Pytest
 
+VERIFICATION CODE:
+WTC-4SF75D3P
