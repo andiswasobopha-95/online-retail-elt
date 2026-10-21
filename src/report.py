@@ -1,5 +1,3 @@
-import sqlite3
-from pathlib import Path
 from src.load import get_connection, DB_PATH
 
 
