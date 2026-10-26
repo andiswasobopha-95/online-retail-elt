@@ -125,14 +125,17 @@ silently. Issues found in the raw data and how they are treated:
 
 ## Sample Results
 
-> Replace with your own output from `python -m src.report`.
+> output from `python -m src.report`.
 
-| Metric                 | Result |
-|------------------------|--------|
-| Total revenue          | [ ]    |
-| Top country by revenue | [ ]    |
-| Best month             | [ ]    |
-| Best-selling product   | [ ]    |
+======================================================
+          ONLINE RETAIL EXECUTIVE SUMMARY          
+======================================================
+💰 Total Net Revenue   : £19,399,632.17
+📦 Total Store Orders  : 52,214
+🌍 Top Country         : United Kingdom (£16,597,424.74)
+📈 Best Month          : 2011-11 (£1,433,884.99)
+🏆 Best-Selling Product: REGENCY CAKESTAND 3 TIER (£327,813.65)
+======================================================
 
 ## Getting Started
 
@@ -182,11 +185,8 @@ databases and temporary files so tests are fast and never touch real data.
 - Migrate the storage layer to PostgreSQL
 - Add data quality assertions as a separate validation step
 
-## Author
-
-**Andiswa** · [GitHub](https://github.com/YOUR_USERNAME)
-
 ## Acknowledgements
 
 Dataset: UCI Machine Learning Repository, Online Retail dataset._
+
 VERIFICATION CODE: WTC-4SF75D3P
