@@ -23,7 +23,7 @@ explainable.
 - Loading raw data as-is and doing transformations inside the database
 - Making and documenting data cleaning decisions on genuinely messy data
 - Writing analytical SQL views that answer business questions
-- Testing pipeline code with pytest and automating checks with GitHub Actions
+- Testing pipeline code with pytest
 
 ## Dataset
 
@@ -79,7 +79,6 @@ reviewable place.
 | Storage        | SQLite              |
 | Transformation | SQL views           |
 | Testing        | pytest              |
-| CI             | GitHub Actions      |
 
 SQLite and plain SQL were chosen on purpose: the dataset is a few hundred
 thousand rows, so heavier infrastructure (Spark, Airflow, a warehouse server)
@@ -99,7 +98,6 @@ online-retail-elt/
 │   ├── load.py            # Load raw data into SQLite
 │   └── report.py          # Print a summary from the mart views
 ├── tests/                 # pytest unit tests
-├── .github/workflows/     # CI pipeline
 ├── requirements.txt
 └── README.md
 ```
@@ -171,11 +169,10 @@ silently. Issues found in the raw data and how they are treated:
    pytest tests/ -v
    ```
 
-## Testing and CI
+## Testing
 
 Unit tests cover the extract and load logic, using in-memory SQLite
 databases and temporary files so tests are fast and never touch real data.
-GitHub Actions runs the test suite on every push and pull request.
 
 ## Possible Extensions
 
