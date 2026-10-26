@@ -130,11 +130,11 @@ silently. Issues found in the raw data and how they are treated:
 ======================================================
           ONLINE RETAIL EXECUTIVE SUMMARY          
 ======================================================
-💰 Total Net Revenue   : £19,399,632.17
-📦 Total Store Orders  : 52,214
-🌍 Top Country         : United Kingdom (£16,597,424.74)
-📈 Best Month          : 2011-11 (£1,433,884.99)
-🏆 Best-Selling Product: REGENCY CAKESTAND 3 TIER (£327,813.65)
+Total Net Revenue   : £19,399,632.17
+Total Store Orders  : 52,214
+Top Country         : United Kingdom (£16,597,424.74)
+Best Month          : 2011-11 (£1,433,884.99)
+Best-Selling Product: REGENCY CAKESTAND 3 TIER (£327,813.65)
 ======================================================
 
 ## Getting Started
