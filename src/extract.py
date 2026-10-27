@@ -1,25 +1,5 @@
-"""
-Extract stage: read the raw CSV file into memory.
-
-TODO:
-1. Write `read_transactions(path)` — read data/raw/online_retail.csv using
-   either Python's built-in `csv.DictReader` or `pandas.read_csv`. Either
-   is fine; pandas is easier for this dataset since it handles mixed types
-   and missing values more gracefully.
-2. Do a basic sanity check: does the file have the columns you expect?
-   Raise a clear error if not — don't let a malformed file silently
-   proceed to the load stage.
-3. Return the data in whatever shape load.py will want it (a DataFrame if
-   using pandas, or a list of dicts if using csv.DictReader).
-
-Things to think about:
-- The real file is ~540,000 rows. Don't load it into memory more than once
-  if you can avoid it — but for a project this size, loading the whole
-  thing with pandas is perfectly reasonable (don't over-engineer this).
-- What encoding is the file in? Some versions of this dataset aren't
-  plain UTF-8 — you may need to specify `encoding="ISO-8859-1"` or similar
-  when reading. If you get a UnicodeDecodeError, that's the fix.
-"""
+"""Extract stage: read the raw Online Retail CSV into a pandas DataFrame and
+check that the expected columns are present."""
 
 import os
 import pandas as pd
@@ -38,7 +18,7 @@ def read_transactions(path: Path = DATA_PATH) -> pd.DataFrame:
             f"Cannot find '{path}'. Make sure you downloaded the CSV and placed it in data/raw/."
         )
 
-    # Use pandas to handle the 540k rows efficiently.
+    # Use pandas to handle the about 1 million rows efficiently.
     # ISO-8859-1 encoding prevents UnicodeDecodeErrors common with the UCI dataset.
     # Casting IDs to string ensures pandas doesn't truncate leading zeros or fail on mixed types.
     df = pd.read_csv(
