@@ -1,10 +1,16 @@
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path("online_retail.db")
+DB_PATH = Path(os.environ.get("SQLITE_DB_PATH", "online_retail.db"))
 STAGING_SQL_PATH = Path("sql/staging.sql")
+MARTS_SQL_PATH = Path("sql/marts.sql")
 
-def run_staging_transform(db_path: Path = DB_PATH, sql_path: Path = STAGING_SQL_PATH):
+def run_staging_transform(
+    db_path: Path = DB_PATH,
+    sql_path: Path = STAGING_SQL_PATH,
+    marts_path: Path = MARTS_SQL_PATH,
+):
     """Executes the staging SQL script to create the staging view and verifies it works."""
     if not sql_path.exists():
         raise FileNotFoundError(f"Staging SQL file not found at {sql_path}")
@@ -16,6 +22,12 @@ def run_staging_transform(db_path: Path = DB_PATH, sql_path: Path = STAGING_SQL_
             
         print("Executing staging transformation script...")
         conn.executescript(sql_script)
+        conn.commit()
+
+        if not marts_path.exists():
+            raise FileNotFoundError(f"Marts SQL file not found at {marts_path}")
+        print("Executing mart views script...")
+        conn.executescript(marts_path.read_text(encoding="utf-8"))
         conn.commit()
         
         # Verification queries
