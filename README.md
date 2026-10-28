@@ -27,9 +27,11 @@ explainable.
 
 ## Dataset
 
-**UCI Online Retail dataset**, real transaction records from a UK-based
-online retailer, roughly 540,000 line items covering December 2010 to
-December 2011. Source: UCI Machine Learning Repository (see the dataset page
+**UCI Online Retail II dataset**, real transaction records from a UK-based
+online retailer, about 1.07 million line items (1,067,371 rows) covering
+December 2009 to December 2011. All monetary values are in pounds sterling (£).
+The final month (December 2011) is partial because the data ends part-way
+through it. Source: UCI Machine Learning Repository (see the dataset page
 for licence and citation details).
 
 | Column      | Description                                    |

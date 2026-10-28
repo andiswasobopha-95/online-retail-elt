@@ -36,11 +36,11 @@ def run():
         print("\n" + "=" * 54)
         print("          ONLINE RETAIL EXECUTIVE SUMMARY          ")
         print("=" * 54)
-        print(f"💰 Total Net Revenue   : £{total_net_rev:,.2f}")
-        print(f"📦 Total Store Orders  : {total_orders:,}")
-        print(f"🌍 Top Country         : {top_country} (£{top_country_rev:,.2f})")
-        print(f"📈 Best Month          : {best_month} (£{best_month_rev:,.2f})")
-        print(f"🏆 Best-Selling Product: {top_prod_desc} (£{top_prod_rev:,.2f})")
+        print(f"Total Net Revenue   : £{total_net_rev:,.2f}")
+        print(f"Total Store Orders  : {total_orders:,}")
+        print(f"Top Country         : {top_country} (£{top_country_rev:,.2f})")
+        print(f"Best Month          : {best_month} (£{best_month_rev:,.2f})")
+        print(f"Best-Selling Product: {top_prod_desc} (£{top_prod_rev:,.2f})")
         print("=" * 54 + "\n")
 
         # 2. Detailed Mart Summaries
