@@ -160,9 +160,9 @@ This prints the row count and the first few rows. You should see
 ### 5. Run the pipeline, in this order
 
 ```bash
-python -m src.load        # 1. load the raw CSV into SQLite (online_retail.db)
-python -m src.transform   # 2. build the staging view and the analytics views
-python -m src.report      # 3. print the sales summary
+python -m src.load        
+python -m src.transform   
+python -m src.report      
 ```
 
 Each step depends on the one before it, so run them in this order. Running
