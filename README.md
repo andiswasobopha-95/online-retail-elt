@@ -132,7 +132,8 @@ cd online-retail-elt
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate        # Windows (PowerShell): .\venv\Scripts\Activate.ps1
+source venv/bin/activate        # Linux and Mac
+.\venv\Scripts\Activate.ps1     # Windows (PowerShell):
 pip install -r requirements.txt
 ```
 
@@ -203,6 +204,9 @@ If you have the `sqlite3` command-line tool installed, you can query the
 views directly:
 
 ```bash
+sqlite3 online_retail.db "DROP VIEW IF EXISTS revenue_by_country;"
+sqlite3 online_retail.db ".tables"
+sqlite3 online_retail.db "DROP VIEW IF EXISTS top_products;"
 sqlite3 online_retail.db "SELECT * FROM monthly_revenue LIMIT 5;"
 ```
 
